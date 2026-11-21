@@ -1,0 +1,246 @@
+{
+  "_about": "Most questions are shots against bench/fixture with no model and no network, which pass on any machine. The last question is for a model and has not been run on one; it asks about the fixture. The fixture is a hand-written fake install (an npm project with a committed node_modules and a Python project with a fake .venv); every package in it is invented. Run from the kit's folder, because `dir` resolves against the caller's folder. The outdated and audit scripts need a registry and are not in the bench.",
+  "questions": [
+    {
+      "id": "overview",
+      "do": "overview",
+      "params": {
+        "dir": "bench/fixture"
+      },
+      "expect": [
+        "pseudopolis-yard@1\\.0\\.0",
+        "unseen-university@0\\.1\\.0",
+        "declared but not installed: hex \\^3\\.0\\.0 \\(npm, package\\.json\\); rincewind >=0\\.1 \\(python, pyproject\\.toml\\)",
+        "two or more major versions of one package: octarine \\(1\\.2\\.0, 0\\.9\\.1\\)",
+        "npm \\(npm\\): 4 direct, 2 transitive; python \\(uv\\): 3 direct, 0 transitive"
+      ]
+    },
+    {
+      "id": "installed-two-versions",
+      "do": "installed",
+      "params": {
+        "dir": "bench/fixture",
+        "name": "octarine"
+      },
+      "expect": [
+        "octarine: 1\\.2\\.0 and 0\\.9\\.1 installed \\(2 versions\\)",
+        "1\\.2\\.0 is direct, declared \\^1\\.0\\.0 \\(dev\\)",
+        "0\\.9\\.1 comes through clacks@1\\.4\\.2",
+        "node_modules/clacks/node_modules/octarine"
+      ]
+    },
+    {
+      "id": "installed-declared-only",
+      "do": "installed",
+      "params": {
+        "dir": "bench/fixture",
+        "name": "hex"
+      },
+      "expect": [
+        "hex is declared \\(\\^3\\.0\\.0 in package\\.json\\) but not installed",
+        "\"match\": \"none\""
+      ]
+    },
+    {
+      "id": "installed-scoped-by-basename",
+      "do": "installed",
+      "params": {
+        "dir": "bench/fixture",
+        "name": "watch"
+      },
+      "expect": [
+        "\"match\": \"basename\"",
+        "@ankh-morpork/watch: 2\\.1\\.0 installed",
+        "declared \\^2\\.1\\.0"
+      ]
+    },
+    {
+      "id": "installed-python",
+      "do": "installed",
+      "params": {
+        "dir": "bench/fixture",
+        "name": "ook",
+        "eco": "python"
+      },
+      "expect": [
+        "ook: 1\\.3\\.0 installed",
+        "\\.venv/lib/python3\\.12/site-packages/ook-1\\.3\\.0\\.dist-info",
+        "declared >=1\\.2"
+      ]
+    },
+    {
+      "id": "why-nested-copy",
+      "do": "why",
+      "params": {
+        "dir": "bench/fixture",
+        "name": "octarine"
+      },
+      "expect": [
+        "clacks@1\\.4\\.2 \\(declared \\^1\\.4\\.0 in package\\.json\\) > octarine@0\\.9\\.1 \\(wanted \\^0\\.9\\.0\\)",
+        "octarine@1\\.2\\.0 is a direct dependency",
+        "clacks@1\\.4\\.2 wants \\^0\\.9\\.0"
+      ]
+    },
+    {
+      "id": "why-transitive",
+      "do": "why",
+      "params": {
+        "dir": "bench/fixture",
+        "name": "luggage"
+      },
+      "expect": [
+        "@ankh-morpork/watch@2\\.1\\.0 \\(declared \\^2\\.1\\.0 in package\\.json\\) > luggage@0\\.3\\.1 \\(wanted \\^0\\.3\\.0\\)",
+        "luggage@0\\.3\\.1 is there through @ankh-morpork/watch@2\\.1\\.0"
+      ]
+    },
+    {
+      "id": "why-python",
+      "do": "why",
+      "params": {
+        "dir": "bench/fixture",
+        "name": "l-space"
+      },
+      "expect": [
+        "l-space@0\\.2\\.1 is a direct dependency \\(>=0\\.2 in pyproject\\.toml \\(dev\\)\\)",
+        "ook@1\\.3\\.0 wants >=0\\.2"
+      ]
+    },
+    {
+      "id": "why-unknown",
+      "do": "why",
+      "params": {
+        "dir": "bench/fixture",
+        "name": "nobby"
+      },
+      "expect": [
+        "no package \\\\\"nobby\\\\\" is installed or pinned here",
+        "direct dependencies: @ankh-morpork/watch, clacks, hex, octarine"
+      ]
+    },
+    {
+      "id": "api-signature",
+      "do": "api",
+      "params": {
+        "dir": "bench/fixture",
+        "name": "@ankh-morpork/watch",
+        "symbol": "patrol"
+      },
+      "expect": [
+        "index\\.d\\.ts:25",
+        "export declare function patrol\\(beat: string, options\\?: PatrolOptions\\): Promise<Report>;",
+        "Walk a beat and report what was found",
+        "\"subpath\": \"\\./rota\""
+      ]
+    },
+    {
+      "id": "api-exports",
+      "do": "api",
+      "params": {
+        "dir": "bench/fixture",
+        "name": "@ankh-morpork/watch"
+      },
+      "expect": [
+        "index\\.d\\.ts \\(type declarations\\)",
+        "\"function\": \"duty, patrol, arrest\"",
+        "\"class\": \"Watchman\"",
+        "watch-rota",
+        "rota\\.d\\.ts"
+      ]
+    },
+    {
+      "id": "api-readme-topic",
+      "do": "api",
+      "params": {
+        "dir": "bench/fixture",
+        "name": "@ankh-morpork/watch",
+        "topic": "night"
+      },
+      "expect": [
+        "\"heading\": \"Night patrols\"",
+        "README\\.md:19",
+        "needs at least two officers"
+      ]
+    },
+    {
+      "id": "api-no-types",
+      "do": "api",
+      "params": {
+        "dir": "bench/fixture",
+        "name": "clacks",
+        "symbol": "send"
+      },
+      "expect": [
+        "lib/clacks\\.js:9",
+        "function send\\(tower, message\\)",
+        "ships no type declarations",
+        "\"export\": \"send, towers, GNU\""
+      ]
+    },
+    {
+      "id": "api-python",
+      "do": "api",
+      "params": {
+        "dir": "bench/fixture",
+        "name": "ook",
+        "symbol": "shelve"
+      },
+      "expect": [
+        "ook/__init__\\.py:15",
+        "def shelve\\(self, title: str, shelf: int = 0\\) -> str:",
+        "Put a book back",
+        "ook/__init__\\.py:7: def ask"
+      ]
+    },
+    {
+      "id": "changes-between",
+      "do": "changes",
+      "params": {
+        "dir": "bench/fixture",
+        "name": "@ankh-morpork/watch",
+        "from": "1.9.3"
+      },
+      "expect": [
+        "2 entries above 1\\.9\\.3 up to 2\\.1\\.0",
+        "CHANGELOG\\.md:10",
+        "`patrol` returns a promise",
+        "the word 'breaking' appears"
+      ]
+    },
+    {
+      "id": "changes-none-shipped",
+      "do": "changes",
+      "params": {
+        "dir": "bench/fixture",
+        "name": "clacks"
+      },
+      "expect": [
+        "clacks@1\\.4\\.2 ships no changelog",
+        "\"ships\": false"
+      ]
+    },
+    {
+      "id": "licences",
+      "do": "licences",
+      "params": {
+        "dir": "bench/fixture"
+      },
+      "expect": [
+        "7 packages",
+        "\"package\": \"clacks@1\\.4\\.2\"",
+        "GPL-3\\.0-only",
+        "luggage@0\\.3\\.1",
+        "LGPLv3",
+        "2 copyleft, 1 with no licence stated, 0 unusual"
+      ]
+    },
+    {
+      "id": "why-octarine-q",
+      "q": "In bench/fixture, why is octarine installed, and in which versions?",
+      "expect": [
+        "1\\.2\\.0",
+        "0\\.9\\.1",
+        "clacks"
+      ]
+    }
+  ]
+}

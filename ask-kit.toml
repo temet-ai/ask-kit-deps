@@ -1,0 +1,56 @@
+id = "temet.deps"
+name = "deps"
+version = "0.1.0"
+min_ask_kit = "0.3.0"
+says = "The packages a project depends on (npm, pnpm, yarn, Python, Cargo, Go): which version of a package is installed and which is declared, why a package is there and what requires it, what is outdated, known vulnerabilities, licences, and how to call an installed library in the installed version (its exports, type signatures, doc comments, README, changelog between versions); and, when asked, installing, updating or removing packages"
+# The (?<=^(?!...)...) prefix on the words a test or Rust question also uses keeps them from firing when the
+# question names a test, typecheck, lint, build or script (tests) or cargo, crates or Cargo.toml (rust).
+keywords = ["(?<=^(?![\\s\\S]*\\b(?:cargo|clippy|rustc|crates?|Cargo\\.(?:toml|lock)|tests?|specs?|type-?checks?|typecheck|tsc|lint\\w*|eslint|builds?|scripts?|compiles?)\\b)[\\s\\S]*)dependenc(y|ies)", "(?<=^(?![\\s\\S]*\\b(?:cargo|clippy|rustc|crates?|Cargo\\.(?:toml|lock)|tests?|specs?|type-?checks?|typecheck|tsc|lint\\w*|eslint|builds?|scripts?|compiles?)\\b)[\\s\\S]*)deps", "(?<=^(?![\\s\\S]*\\b(?:cargo|clippy|rustc|crates?|Cargo\\.(?:toml|lock)|tests?|specs?|type-?checks?|typecheck|tsc|lint\\w*|eslint|builds?|scripts?|compiles?)\\b)[\\s\\S]*)packages?", "(?<=^(?![\\s\\S]*\\b(?:cargo|clippy|rustc|crates?|Cargo\\.(?:toml|lock)|tests?|specs?|type-?checks?|typecheck|tsc|lint\\w*|eslint|builds?|scripts?|compiles?)\\b)[\\s\\S]*)node_modules", "(?<=^(?![\\s\\S]*\\b(?:cargo|clippy|rustc|crates?|Cargo\\.(?:toml|lock)|tests?|specs?|type-?checks?|typecheck|tsc|lint\\w*|eslint|builds?|scripts?|compiles?)\\b)[\\s\\S]*)package\\.json", "package-lock", "(?<=^(?![\\s\\S]*\\b(?:cargo|clippy|rustc|crates?|Cargo\\.(?:toml|lock)|tests?|specs?|type-?checks?|typecheck|tsc|lint\\w*|eslint|builds?|scripts?|compiles?)\\b)[\\s\\S]*)lockfile", "(?<=^(?![\\s\\S]*\\b(?:cargo|clippy|rustc|crates?|Cargo\\.(?:toml|lock)|tests?|specs?|type-?checks?|typecheck|tsc|lint\\w*|eslint|builds?|scripts?|compiles?)\\b)[\\s\\S]*)npm", "(?<=^(?![\\s\\S]*\\b(?:cargo|clippy|rustc|crates?|Cargo\\.(?:toml|lock)|tests?|specs?|type-?checks?|typecheck|tsc|lint\\w*|eslint|builds?|scripts?|compiles?)\\b)[\\s\\S]*)pnpm", "(?<=^(?![\\s\\S]*\\b(?:cargo|clippy|rustc|crates?|Cargo\\.(?:toml|lock)|tests?|specs?|type-?checks?|typecheck|tsc|lint\\w*|eslint|builds?|scripts?|compiles?)\\b)[\\s\\S]*)yarn", "pip", "(?<=^(?![\\s\\S]*\\b(?:cargo|clippy|rustc|crates?|Cargo\\.(?:toml|lock)|tests?|specs?|type-?checks?|typecheck|tsc|lint\\w*|eslint|builds?|scripts?|compiles?)\\b)[\\s\\S]*)uv", "venv", "site-packages", "pyproject", "requirements\\.txt", "go\\.mod", "installed version", "installed \\S+", "\\S+ is installed", "why is \\S+ installed", "(?<=^(?![\\s\\S]*\\b(?:cargo|clippy|rustc|crates?|Cargo\\.(?:toml|lock)|tests?|specs?|type-?checks?|typecheck|tsc|lint\\w*|eslint|builds?|scripts?|compiles?)\\b)[\\s\\S]*)pulls in", "(?<=^(?![\\s\\S]*\\b(?:cargo|clippy|rustc|crates?|Cargo\\.(?:toml|lock)|tests?|specs?|type-?checks?|typecheck|tsc|lint\\w*|eslint|builds?|scripts?|compiles?)\\b)[\\s\\S]*)which version", "(?<=^(?![\\s\\S]*\\b(?:cargo|clippy|rustc|crates?|Cargo\\.(?:toml|lock)|tests?|specs?|type-?checks?|typecheck|tsc|lint\\w*|eslint|builds?|scripts?|compiles?)\\b)[\\s\\S]*)outdated", "(?<=^(?![\\s\\S]*\\b(?:cargo|clippy|rustc|crates?|Cargo\\.(?:toml|lock)|tests?|specs?|type-?checks?|typecheck|tsc|lint\\w*|eslint|builds?|scripts?|compiles?)\\b)[\\s\\S]*)upgrade", "vulnerab\\w+", "advisor(y|ies)", "(?<=^(?![\\s\\S]*\\b(?:cargo|clippy|rustc|crates?|Cargo\\.(?:toml|lock)|tests?|specs?|type-?checks?|typecheck|tsc|lint\\w*|eslint|builds?|scripts?|compiles?)\\b)[\\s\\S]*)audit", "CVE", "licen[cs]es?", "changelog", "breaking changes?", "(?<=^(?![\\s\\S]*\\b(?:cargo|clippy|rustc|crates?|Cargo\\.(?:toml|lock)|tests?|specs?|type-?checks?|typecheck|tsc|lint\\w*|eslint|builds?|scripts?|compiles?)\\b)[\\s\\S]*)transitive", "peer dependency", "type declarations?", "exports?", "library docs"]
+route_hint = "which packages a project has, why, how old, how safe, under which licence, and how to call an installed library (its API in the installed version) is deps, and so is adding, removing or updating a package; a question that names cargo, crates, Cargo.toml or a Rust workspace is rust (deps still reads Cargo in a mixed project); running the project's tests, typecheck, lint or build, and its package.json scripts, are tests; the project's own code is code; what a past session decided about a dependency is sessions; a pull request that bumps a dependency is github"
+cite = "`package@version` and `path:line` inside the package, or the command that was run"
+instructions = "instructions.md"
+scripts = "scripts"
+bench = "bench/questions.json"
+acts = ["deps pm install", "deps pm i", "deps pm add", "deps pm ci", "deps pm clean-install", "deps pm remove", "deps pm rm", "deps pm uninstall", "deps pm un", "deps pm update", "deps pm up", "deps pm upgrade", "deps pm sync", "deps pm lock", "deps pm dedupe", "deps pm prune", "deps pm audit fix", "deps pm link", "deps pm unlink", "deps pm rebuild", "deps pm import", "deps pm fetch", "deps pm get", "deps pm download", "deps pm venv", "deps pm vendor", "deps pm generate-lockfile", "deps pm mod tidy", "deps pm mod download", "deps pm mod vendor", "deps pm mod edit", "deps pm work sync", "deps pm pip install", "deps pm pip uninstall", "deps pm pip sync", "deps pm pip compile"]
+
+[[settings]]
+key = "WORKDIR"
+about = "the folder questions are about; by default the folder the agent runs in"
+detect = ["node", "-e", "process.stdout.write(process.cwd())"]
+
+[[settings]]
+key = "VENV"
+about = "the Python virtual environment, when it is not .venv, venv or env under the project root (a path, relative to the root)"
+default = ""
+
+[[settings]]
+key = "OSV_URL"
+about = "the OSV API that Cargo and Go advisories are asked from; change it for a mirror"
+default = "https://api.osv.dev"
+
+[[sources]]
+kind = "module"
+name = "deps"
+module = "deps.mjs"
+api = "api.d.ts"
+
+[[actions]]
+name = "why"
+title = "Why a package is installed"
+script = "why"
+match = ['why (?:is|are) (?<name>@?[\w./-]+) (?:installed|here|in node_modules|in the lockfile|a dependency|in the project|in the tree)', 'why do we (?:have|depend on) (?<name>@?[\w./-]+)(?: (?:installed|here|in node_modules|in the lockfile|as a dependency))?', 'what (?:requires|pulls in) (?<name>@?[\w./-]+)']
+expect = '"chains"'
+
+[[actions]]
+name = "installed"
+title = "Which version of a package is installed"
+script = "installed"
+match = ['(?:which|what) version of (?<name>@?[\w./-]+) (?:is installed|do we have|do we use|are we on|is in node_modules|is in the lockfile)']
+expect = '"version"'
+
+[[actions]]
+name = "outdated"
+title = "Which dependencies are outdated"
+script = "outdated"
+match = ['(?:which|what) (?:dependencies|packages|deps) are (?:outdated|out of date|behind)', "what(?:'s| is) outdated"]
+expect = '"behind"'

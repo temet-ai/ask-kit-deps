@@ -1,0 +1,12 @@
+[project]
+name = "unseen-university"
+version = "0.1.0"
+description = "Fixture project for the deps kit: every package here is hand-written and fake."
+requires-python = ">=3.12"
+dependencies = [
+    "ook>=1.2",
+    "rincewind>=0.1",  # declared, not installed
+]
+
+[dependency-groups]
+dev = ["l-space>=0.2"]
