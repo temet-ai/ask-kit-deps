@@ -15,8 +15,8 @@ export default async function ({ deps }, { eco, dir, max = 30, severity } = {}) 
   const ecos = eco ? [eco] : p.ecosystems.map((e) => e.eco);
   const sources = [];
   let found = [];
-  for (const e of ecos) {
-    const r = await d.advisories({ eco: e });
+  const results = await Promise.all(ecos.map((e) => d.advisories({ eco: e })));
+  for (const r of results) {
     sources.push({ eco: r.eco, source: r.source, checked: r.checked, ...(r.error ? { error: r.error } : {}), ...(r.note ? { note: r.note } : {}) });
     found.push(...r.advisories.map((a) => ({ eco: r.eco, ...a })));
   }
