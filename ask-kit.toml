@@ -1,6 +1,6 @@
 id = "temet.deps"
 name = "deps"
-version = "0.1.0"
+version = "0.1.1"
 min_ask_kit = "0.3.0"
 says = "The packages a project depends on (npm, pnpm, yarn, Python, Cargo, Go): which version of a package is installed and which is declared, why a package is there and what requires it, what is outdated, known vulnerabilities, licences, and how to call an installed library in the installed version (its exports, type signatures, doc comments, README, changelog between versions); and, when asked, installing, updating or removing packages"
 # The (?<=^(?!...)...) prefix on the words a test or Rust question also uses keeps them from firing when the
@@ -13,6 +13,7 @@ instructions = "instructions.md"
 scripts = "scripts"
 bench = "bench/questions.json"
 acts = ["deps pm install", "deps pm i", "deps pm add", "deps pm ci", "deps pm clean-install", "deps pm remove", "deps pm rm", "deps pm uninstall", "deps pm un", "deps pm update", "deps pm up", "deps pm upgrade", "deps pm sync", "deps pm lock", "deps pm dedupe", "deps pm prune", "deps pm audit fix", "deps pm link", "deps pm unlink", "deps pm rebuild", "deps pm import", "deps pm fetch", "deps pm get", "deps pm download", "deps pm venv", "deps pm vendor", "deps pm generate-lockfile", "deps pm mod tidy", "deps pm mod download", "deps pm mod vendor", "deps pm mod edit", "deps pm work sync", "deps pm pip install", "deps pm pip uninstall", "deps pm pip sync", "deps pm pip compile"]
+reads = ["npm ls", "npm outdated", "npm view", "pnpm why", "pnpm ls", "yarn why", "pip show", "pip list", "uv tree"]
 
 [[settings]]
 key = "WORKDIR"
